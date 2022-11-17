@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const particlesArray = [];
+let hue = 0;
 
 window.addEventListener('resize', function() {
     canvas.width = window.innerWidth;
@@ -55,10 +56,10 @@ class Particle {
         if (this.size > 0.2) this.size -= .1;
     }
     draw(){
-        ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-    ctx.fill();
+        ctx.fillStyle = 'hsl(' + hue + ', 100%, 50%';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.fill();
     }
 }
 
@@ -79,6 +80,7 @@ function animate(){
     ctx.fillStyle = 'rgba(0,0,0, .1'
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles();
+    hue++
     requestAnimationFrame(animate);
 
 }
