@@ -49,14 +49,15 @@ class Particle {
         this.size = Math.random() * 20 + 1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
+        this.color = 'hsl(' + hue + ', 100%, 50%';
     }
     update(){
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.size > 0.2) this.size -= .1;
+        if (this.size > 0.9) this.size -= .3;
     }
     draw(){
-        ctx.fillStyle = 'hsl(' + hue + ', 100%, 50%';
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill();
@@ -68,7 +69,7 @@ function handleParticles() {
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
-        if (particlesArray[i].size <= 0.3){
+        if (particlesArray[i].size <= 3){
             particlesArray.slice(i, 1);
         }
         
@@ -80,7 +81,7 @@ function animate(){
     ctx.fillStyle = 'rgba(0,0,0, .1'
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles();
-    hue++
+    hue+= 0.5;
     requestAnimationFrame(animate);
 
 }
